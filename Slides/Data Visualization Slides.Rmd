@@ -6,6 +6,7 @@ author: |
   | Rick Brown
   | Southern Utah University
   | Red Rock Data Science Conference 2025
+  | GitHub Page: [github.com/rbrown53/RRDS25](github.com/rbrown53/RRDS25)
 date: 28 May 2025
 output: 
  beamer_presentation:
@@ -36,6 +37,11 @@ library(dslabs)
 library(tidyverse)
 library(reticulate)
 ```
+
+## GitHub Page
+
+These slides, source file, the code chunks, the workshop activities, and the data files can be found at [github.com/rbrown53/RRDS25](github.com/rbrown53/RRDS25). 
+
 
 
 ## `ggplot2 ` Introduction
