@@ -795,7 +795,7 @@ ggplotly(p, tooltip = "text") # Makes only text shown in hover,
 
 ## Bonus: `plotly` 
 
-![](figs/plotly3.png){width=90%}
+![](figs/plotly.png){width=90%}
 
 
 ## Session info
