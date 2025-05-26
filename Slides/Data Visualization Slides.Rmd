@@ -308,7 +308,7 @@ ggplot(data = flights, aes(x = distance, y = air_time)) +
 ## Changing Font Size and Type
 
 ```{r ggplot_font_b, out.width="95%", echo = F, eval = T}
-# color by a continuous variable
+# change font size and style
 ggplot(data = flights, aes(x = distance, y = air_time)) +
   geom_point(shape = 16, size = 3) +
   labs(title = "Check out this Font!",
@@ -459,7 +459,7 @@ ggplot(data = flights,
 We can change the limits of the x and y axes if we don't adjust the axis ticks using the `lims()` function.
 
 ```{r ggplot_limits, out.width="55%", echo = T, eval = T}
-# color by a continuous variable
+# change the x and y limits
 ggplot(data = flights, aes(x = distance, y = air_time)) +
   geom_point(size = 3) +
   lims(x = c(0, 4000), y = c(0, 400))
@@ -470,7 +470,7 @@ ggplot(data = flights, aes(x = distance, y = air_time)) +
 If we want to change the axis ticks, we can use the `scale_x_continous()` and `scale_y_continuous()` functions. If these functions are used, then the x and y limits can only be changed in those functions, not in `lims()`. If both a `scale_*()` function and the `lims()` function are used, then one will override the other. 
 
 ```{r ggplot_ticks_a, out.width="56%", echo = T, eval = F}
-# color by a continuous variable
+# change the x and y breaks and limits
 ggplot(data = flights, aes(x = distance, y = air_time)) +
   geom_point(size = 3) +
   scale_x_continuous(breaks = seq(0, 4000, by = 500), 
@@ -482,7 +482,7 @@ ggplot(data = flights, aes(x = distance, y = air_time)) +
 ## Changing Axis Ticks
 
 ```{r ggplot_ticks_b, out.width="95%", echo = F, eval = T}
-# color by a continuous variable
+# change the x and y breaks and limits
 ggplot(data = flights, aes(x = distance, y = air_time)) +
   geom_point(size = 3) +
   scale_x_continuous(breaks = seq(0, 4000, by = 500), 
