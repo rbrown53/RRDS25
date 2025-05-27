@@ -1,0 +1,114 @@
+---
+title: "Data Visualization Workshop: Activity 3"
+output: html_document
+date: 28 May 2025
+---
+
+## Problem 1
+Type in code that will load the tidyverse, which contains ggplot2.
+```{r}
+library(tidyverse)
+?storms
+```
+
+## Problem 2
+Change the category variable to a factor. In R, you can do this by typing
+`storms2 <- mutate(storms, category = factor(category))` and then using `storms2` when making these graphs.
+```{r}
+storms2 <- mutate(dplyr::storms, category = factor(category))
+```
+
+## Problem 3
+Using the `ggplot()` function, create a bar plot of the category variable in the storms2 data set. You can add the counts on top of each bar by adding
+`geom_text(aes(label = ..count..), stat = "count", vjust = -0.4)`.
+```{r}
+ggplot(storms2, aes(x = category)) +
+  geom_bar(color = "black", fill = "lightblue") +
+  geom_text(aes(label = ..count..), stat = "count", vjust = -0.4) +
+  labs(title = "Bar Plot of Hurricane Category")
+```
+
+## Problem 4
+Now create a histogram of the `wind` variable. Note that the binwidth is 10.
+```{r}
+ggplot(storms2, aes(x = wind)) +
+  geom_histogram(binwidth = 10, color = "black", fill = "lightblue") +
+  labs(x = "Wind Speed", y = "Frequency", 
+       title = "Histogram for Storm Wind Speed") +
+  scale_x_continuous(breaks = seq(0, 160, by = 10))
+```
+
+## Problem 5
+Create a boxplot of the `wind` variable. The text size for the axis titles is 14 and the text size for the plot title is 20. You can get rid of the numbers on the x-axis by adding on the function `scale_x_continuous(breaks = NULL)`.
+```{r}
+ggplot(storms2, aes(y = wind)) +
+  geom_boxplot(color = "black", fill = "lightblue") +
+  labs(y = "Wind Speed", 
+       title = "Boxplot for Storm Wind Speed") +
+  theme(plot.title = element_text(size = 20),
+        axis.title = element_text(size = 14)) +
+  scale_x_continuous(breaks = NULL)
+```
+
+## Problem 6
+Now create side-by-side boxplots for wind speed.
+```{r}
+ggplot(storms2, aes(x = category, y = wind, fill = category)) +
+  geom_boxplot(color = "black") +
+  labs(x = "Hurricane Category", y = "Wind Speed", 
+       title = "Boxplot for Storm Wind Speed by Category") +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+## Problem 7
+Now, take the `storms2` data set, filter it so it only shows storms after the year 2020, then create a scatterplot with `wind` speed on the x-axis and `pressure` on the y-axis. Each color is different based on the `status` variable.
+```{r}
+storms2 |>
+  filter(year > 2020) |>
+  ggplot(aes(x = wind, y = pressure, color = status)) +
+  geom_point() +
+  labs(x = "Wind Speed (in knots)", y = "Pressure (in millibars)",
+       color = "Status", 
+       title = "Scatterplot of Pressure vs Wind Speed by Status") +
+  scale_color_manual(values = c("red", "orange4", "gold", "green3","blue",
+                                "purple", "gray2"))
+```
+
+## Problem 8
+The plot below is a stacked bar plot of `year` grouped by `status`. The colors can be set by adding on `scale_fill_brewer()`. This color palette is called "Set1" and direction is set to -1. Notice that the hurricane category is on the bottom to make it easiest to compare across years. This can be accomplished in R using `fct_relevel(status, "hurricane", after = Inf)` either in the `aes()` function or
+before the dataset is put into `ggplot()`. 
+```{r}
+storms2 |>
+  mutate(status = fct_relevel(status, "hurricane", after = Inf)) |> 
+  ggplot(aes(x = factor(year), fill = status)) +
+  geom_bar(color = "black") +
+  labs(x = "Year", y = "Frequency", fill = "Status") +
+  scale_fill_brewer(palette = "Set1", direction = -1) +
+  scale_y_continuous(breaks = seq(0, 800, 100)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+## Problem 9
+Time for a facet grid! Here we have histograms for the `wind` speed variable for years 2019-2022 (2022 is the last year in the dataset). Each histogram has 20 bins, the background theme is classic, and the title is size 20 and bold. The facet grid labels are size 12 and bold. Those can be changed with the `strip.text` option in the `theme()` function. Note that the theme used here is classic.
+```{r}
+p <- storms2 |>
+  filter(year >= 2019) |>
+  ggplot(aes(x = wind, fill = factor(year))) +
+  geom_histogram(color = "black", bins = 30) +
+  facet_grid(rows = vars(year)) +
+  labs(x = "Wind Speed (knots)", y = "Frequency", 
+       fill = "Year", title = "Histogram of Wind Speed by Year") +
+  theme_classic() +
+  theme(plot.title = element_text(size = 20, face = "bold"),
+        strip.text = element_text(size = 12, face = "bold"))
+print(p)
+```
+
+## Problem 10
+If you are using R, save one of the plots you made above as an R object. Install and load the `plotly` library. Then use the `ggplotly()` function on the saved plot to change it to an interactive plot. 
+```{r}
+library(plotly)
+ggplotly(p)
+```
+
