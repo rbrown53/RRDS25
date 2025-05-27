@@ -50,7 +50,7 @@ ggplot(storms2, aes(x = category, y = wind, fill = category)) +
 #############
 # Problem 7 #
 #############
-storm2 |>
+storms2 |>
   filter(year > 2020) |>
   ggplot(aes(x = wind, y = pressure, color = status)) +
   geom_point() +
