@@ -98,7 +98,6 @@ plot_8.show()
 #############
 # Problem 9 #
 #############
-# storms2['year'] = storms2['year'].astype('int')
 storms2_filtered = storms2.query("year >= 2019").copy()
 storms2_filtered['year'] = storms2_filtered['year'].astype("category")
 
@@ -109,7 +108,7 @@ plot_9 = (
     + labs(x = "Wind Speed (knots)", y = "Frequency", 
            fill = "Year", title = "Histogram of Wind Speed by Year")
     + theme_classic()
-    + theme(plot_title = element_text(size = 20, face = "bold"),
+    + theme(plot_title = element_text(size = 20, fontweight = "bold"),
             strip_text = element_text(size = 12, face = "bold"))
 )
 plot_9.show()
