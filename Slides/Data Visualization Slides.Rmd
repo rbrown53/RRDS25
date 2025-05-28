@@ -79,17 +79,6 @@ The `plotnine` package in Python is "an implementation of a grammar of graphics 
 
 So, when learning `ggplot2`, you are also, in essence, learning `plotnine`. 
 
-## `plotnine ` Differences
-
-The main differences between `ggplot2` and `plotnine` are:
-
-* Titles in `plotnine` are by default are centered instead of left-aligned
-* We need to put quotes around variable names in `plotnine`. 
-* Any function argument that has a period (.) in `ggplot2` has an underscore (_) in `plotnine`
-  - Ex. `theme(axis.title)` in `ggplot2` would be `theme(axis_title)` in `plotnine`.
-* We put parentheses around all functions to build a plot in `plotnine`.
-* We need to save the plot as an object in `plotnine` and show it with `plot_name.show()`. 
-
 In these slides, we will focus on `ggplot2`, but I'll show some examples in `plotnine` as well.
 
 ## `ggplot` Basics
@@ -152,6 +141,16 @@ ggplot(data = flights) +
        title = "ggplot: Flights")
 ```
 
+## `plotnine ` Differences
+
+The main differences between `ggplot2` and `plotnine` are:
+
+* Titles in `plotnine` are by default are centered instead of left-aligned
+* We need to put quotes around variable names in `plotnine`. 
+* Any function argument that has a period (.) in `ggplot2` has an underscore (_) in `plotnine`
+  - Ex. `theme(axis.title)` in `ggplot2` would be `theme(axis_title)` in `plotnine`.
+* We put parentheses around all functions to build a plot in `plotnine`.
+* We need to save the plot as an object in `plotnine` and show it with `plot_name.show()`. 
 
 ## Example in `plotnine`
 
